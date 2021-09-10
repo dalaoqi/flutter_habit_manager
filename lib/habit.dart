@@ -20,8 +20,8 @@ class Habit {
   final int? id;
   final String habitName;
   final String description;
-  final int numRepetitions;
-  final int interval;
+  final String numRepetitions;
+  final String interval;
   final Color color;
   final DateTime createdTime;
 
@@ -39,8 +39,8 @@ class Habit {
           {int? id,
           String? habitName,
           String? description,
-          int? numRepetitions,
-          int? interval,
+          String? numRepetitions,
+          String? interval,
           Color? color,
           DateTime? createdTime}) =>
       Habit(
@@ -56,8 +56,8 @@ class Habit {
         id: json[HabitFields.id] as int?,
         habitName: json[HabitFields.name] as String,
         description: json[HabitFields.description] as String,
-        numRepetitions: json[HabitFields.numRepetitions] as int,
-        interval: json[HabitFields.interval] as int,
+        numRepetitions: json[HabitFields.numRepetitions] as String,
+        interval: json[HabitFields.interval] as String,
         color: json[HabitFields.color] as Color,
         createdTime: DateTime.parse(json[HabitFields.createdTime] as String),
       );

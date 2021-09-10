@@ -117,9 +117,9 @@ class _Home extends State<Home> {
           children: <Widget>[
             Container(
                 child: Padding(
-                    padding: const EdgeInsets.fromLTRB(18, 10, 18, 10),
+                    padding: const EdgeInsets.fromLTRB(38, 30, 0, 0),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      // mainAxisAlignment: MainAxisAlignment.,
                       children: <Widget>[
                         RichText(
                           // softWrap: true,
@@ -129,7 +129,7 @@ class _Home extends State<Home> {
                                 text:
                                     "${DateTime.now().year} 年 ${DateTime.now().month} 月 ${DateTime.now().day} 日",
                                 style: TextStyle(
-                                  fontSize: 25,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black,
                                 ),
@@ -360,7 +360,7 @@ class _Home extends State<Home> {
                               Duration(days: 1),
                             ),
                           ),
-                          style:TextStyle(
+                          style: TextStyle(
                             color: Color(0xBC454444),
                             fontWeight: FontWeight.normal,
                             fontSize: 15,

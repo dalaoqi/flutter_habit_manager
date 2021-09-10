@@ -3,22 +3,22 @@ import 'package:flutter/material.dart';
 class HabitFormWidget extends StatelessWidget {
   final String? name;
   final String? description;
-  final int? numRepetitions;
-  final int? interval;
+  final String? numRepetitions;
+  final String? interval;
   final Color? color;
 
   final ValueChanged<String> onChangedName;
   final ValueChanged<String> onChangedDescription;
-  final ValueChanged<int> onChangedNumRepetitions;
-  final ValueChanged<int> onChangedInterval;
+  final ValueChanged<String> onChangedNumRepetitions;
+  final ValueChanged<String> onChangedInterval;
   final ValueChanged<Color> onChangedColor;
 
   const HabitFormWidget(
       {Key? key,
       this.name = '',
       this.description = '',
-      this.numRepetitions = 0,
-      this.interval = 0,
+      this.numRepetitions = '',
+      this.interval = '',
       this.color = Colors.black,
       required this.onChangedName,
       required this.onChangedDescription,
@@ -28,77 +28,149 @@ class HabitFormWidget extends StatelessWidget {
       : super(key: key);
 
   @override
-  Widget build(BuildContext context) => SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              buildTitle(),
-              SizedBox(height: 8),
-              buildDescription(),
-              SizedBox(height: 16),
+  Widget build(BuildContext context) => Scaffold(
+        body: Container(
+          child: ListView(children: <Widget>[
+            buildTitle(),
+            //   SizedBox(height: 8),
+            buildNumRepetitions(),
+            buildInterval(),
+            buildDescription()
+          ]
+              //   SizedBox(height: 8),
+              //   buildInterval(),
+              //   SizedBox(height: 8),
+              //   buildDescription(),
+              //   SizedBox(height: 8)
+              // ],
+              ),
+        ),
+      );
 
-              SizedBox(height: 8),
-
-            ],
+  Widget buildTitle() => Container(
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(color: Colors.grey.withOpacity(0.5)),
+            bottom: BorderSide(color: Colors.grey.withOpacity(0.5)),
+          ),
+        ),
+        margin: EdgeInsets.fromLTRB(0, 10.0, 0, 10.0),
+        padding: EdgeInsets.all(5),
+        child: ListTile(
+          title: TextFormField(
+            maxLines: 1,
+            initialValue: name,
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              errorBorder: InputBorder.none,
+              disabledBorder: InputBorder.none,
+              contentPadding: EdgeInsets.only(
+                left: 0,
+                bottom: 3,
+                top: 3,
+                right: 15,
+              ),
+              labelText: '習慣名稱',
+              // hintStyle: TextStyle(color: Colors.black26, fontSize: 18),
+            ),
+            obscureText: false,
+            validator: (title) =>
+                title != null && title.isEmpty ? '此欄不能為空' : null,
+            onChanged: onChangedName,
           ),
         ),
       );
 
-  Widget buildTitle() => TextFormField(
-        maxLines: 1,
-        initialValue: name,
-        style: TextStyle(
-          color: Colors.black,
-          fontWeight: FontWeight.bold,
-          fontSize: 24,
+  Widget buildNumRepetitions() => Container(
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(color: Colors.grey.withOpacity(0.5), width: 0.5),
+            bottom: BorderSide(color: Colors.grey.withOpacity(0.5), width: 0.5),
+          ),
         ),
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: 'Title',
-          hintStyle: TextStyle(color: Colors.black),
+        child: ListTile(
+          title: TextFormField(
+            maxLines: 1,
+            initialValue: numRepetitions,
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              labelText: '數量',
+              // hintStyle: TextStyle(color: Colors.black26, fontSize: 18),
+            ),
+            obscureText: false,
+            validator: (title) =>
+                title != null && title.isEmpty ? '此欄不能為空' : null,
+            onChanged: onChangedNumRepetitions,
+          ),
         ),
-        validator: (title) =>
-            title != null && title.isEmpty ? 'The title cannot be empty' : null,
-        onChanged: onChangedName,
       );
 
-  Widget buildDescription() => TextFormField(
-        maxLines: 5,
-        initialValue: description,
-        style: TextStyle(color: Colors.black, fontSize: 18),
-        decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: 'Type something...',
-          hintStyle: TextStyle(color: Colors.black),
+  Widget buildInterval() => Container(
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(color: Colors.grey.withOpacity(0.5), width: 0.5),
+            bottom: BorderSide(color: Colors.grey.withOpacity(0.5), width: 0.5),
+          ),
         ),
-        validator: (title) => title != null && title.isEmpty
-            ? 'The description cannot be empty'
-            : null,
-        onChanged: onChangedDescription,
+        child: ListTile(
+          title: TextFormField(
+            maxLines: 1,
+            initialValue: interval,
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              labelText: '週期',
+              // hintStyle: TextStyle(color: Colors.black26, fontSize: 18),
+            ),
+            obscureText: false,
+            validator: (title) =>
+                title != null && title.isEmpty ? '此欄不能為空' : null,
+            onChanged: onChangedInterval,
+          ),
+        ),
       );
 
-  Widget buildNumRepetitions() => TextFormField(
-    maxLines: 1,
-    keyboardType: TextInputType.number,
-    inputFormatters: <TextInputFormatter>[
-      FilteringTextInputFormatter.digitsOnly
-    ],
-    style: TextStyle(
-      color: Colors.black,
-      fontWeight: FontWeight.bold,
-      fontSize: 24,
-    ),
-    decoration: InputDecoration(
-      border: InputBorder.none,
-
-      hintText: 'NumRepetitions',
-      hintStyle: TextStyle(color: Colors.black),
-    ),
-    validator: (title) =>
-    title != null && title.isEmpty ? 'The title cannot be empty' : null,
-    onChanged: onChangedNumRepetitions,
-  );
-
+  Widget buildDescription() => Container(
+        decoration: BoxDecoration(
+          border: Border(
+            top: BorderSide(color: Colors.grey.withOpacity(0.5), width: 0.5),
+            bottom: BorderSide(color: Colors.grey.withOpacity(0.5), width: 0.5),
+          ),
+        ),
+        child: ListTile(
+          title: TextFormField(
+            maxLines: 3,
+            initialValue: description,
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
+            ),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              // hintText: "Detailed Description",
+              labelText: "描述這個習慣",
+            ),
+            obscureText: false,
+            // validator: (title) => title != null && title.isEmpty ? '此欄不能為空' : null,
+            onChanged: onChangedDescription,
+          ),
+        ),
+      );
 }

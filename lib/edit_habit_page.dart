@@ -20,8 +20,8 @@ class _AddEditHabitPageState extends State<AddEditHabitPage> {
   final _formKey = GlobalKey<FormState>();
   late String habitName;
   late String description;
-  late int numRepetitions;
-  late int interval;
+  late String numRepetitions;
+  late String interval;
   late Color color;
 
   @override
@@ -29,8 +29,8 @@ class _AddEditHabitPageState extends State<AddEditHabitPage> {
     super.initState();
 
     habitName = widget.habit?.habitName ?? '';
-    numRepetitions = widget.habit?.numRepetitions ?? 0;
-    interval = widget.habit?.interval ?? 0;
+    numRepetitions = widget.habit?.numRepetitions ?? '';
+    interval = widget.habit?.interval ?? '';
     description = widget.habit?.description ?? '';
     color = widget.habit?.color ?? Colors.black;
   }
@@ -118,7 +118,7 @@ class _AddEditHabitPageState extends State<AddEditHabitPage> {
   // }
   //
   Future addHabit() async {
-    final note = Habit(
+    final habit = Habit(
       habitName: habitName,
       numRepetitions: numRepetitions,
       interval: interval,
@@ -127,7 +127,7 @@ class _AddEditHabitPageState extends State<AddEditHabitPage> {
       color: color,
     );
 
-    await HabitsDatabase.instance.create(note);
+    await HabitsDatabase.instance.create(habit);
     // }
   }
 }
